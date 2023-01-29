@@ -1,0 +1,167 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0em;
+    padding: 0em;
+    scroll-behavior: smooth;
+}
+
+img {
+    max-width: 100%; /* Pictures won't stretch larger than their natural size */
+    max-height:100%;
+}
+
+nav {
+    width: 100%;
+    overflow: auto;
+    background-color: #009DC6;
+    z-index: 20;
+    position: sticky;
+    top: 0;
+    left: 0;
+    box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.5);
+}
+
+nav img {
+    height: 3em;
+    margin: 16px;
+}
+
+nav ul {
+    float: right;
+    list-style-type: none;
+    text-align: center;
+    margin: 0;
+    padding: 5px;
+    font-size: 0; /* Remove space between li */
+}
+
+nav li {
+    display: inline-block;
+    font-size: 18px;
+    padding: 20px;
+}
+
+nav a, nav li {
+    color: whitesmoke;
+}
+
+nav > a, nav li a:link, nav li a:visited {
+    text-decoration: none;
+}
+
+nav li a:hover, nav li a:active {
+    text-decoration: underline;
+}
+
+/* The alert message box */
+.flashes {
+    width: 75%;
+    margin: 20px 16px;
+    padding: 20px 16px;
+    border-radius: 6px;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.error {
+    background-color: #ffebe9; /* Red */
+    border-color: #ffc0c0;
+}
+
+.success {
+    background-color: #dafbe1; /* Green */
+    border-color: #a0e5b2;
+}
+
+.warning {
+    background-color: #FFF8C5; /* orange */
+    border-color: #EED888;
+}
+
+/* The close button */
+.closebtn {
+    margin-left: 15px;
+    color: black;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+main {
+    width: min(1232px, 100%);
+    margin-left: auto;
+    margin-right: auto;
+    padding: 16px 16px;
+}
+
+main h1 {
+    flex: auto;
+    margin: 1rem 0 0.25rem 0;
+}
+
+.post > header {
+    display: flex;
+    align-items: flex-end;
+    font-size: 0.85em;
+    margin-bottom: 1em;
+}
+
+.post > header > div:first-of-type {
+    flex: auto;
+}
+
+.post > header h2 {
+    font-size: 1.5em;
+    margin-bottom: 0;
+}
+
+.post .about, .tip {
+    color: slategray;
+    font-style: italic;
+}
+
+.post .post-content {
+    white-space: pre-line;
+}
+
+form {
+    width: min(800px, 100%);
+    margin: 1em 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    font-weight: bold;
+    margin-bottom: 0.5em;
+}
+
+form input {
+    margin-bottom: 1em;
+}
+
+main textarea {
+    margin-bottom: 1em;
+    min-height: 12em;
+    resize: vertical;
+}
+
+input.danger {
+    color: #cc2f2e;
+}
+
+input[type=submit] {
+    align-self: start;
+    min-width: 10em;
+}
