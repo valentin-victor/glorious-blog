@@ -39,7 +39,7 @@ def register():
             try:
                 db.execute(
                     f'INSERT INTO user (username, password) VALUES '
-                    f'({username}, {password})'
+                    f'("{username}", "{password}")'
                 )
                 db.commit()
             except db.IntegrityError:  # catch this specific exception

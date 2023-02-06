@@ -56,7 +56,7 @@ def create():
             db = get_db()
             db.execute(
                 'INSERT INTO post (title, body, author_id)'
-                f' VALUES ({title}, {body}, {flask.g.user["id"]})'
+                f' VALUES ("{title}", "{body}", {flask.g.user["id"]})'
             )
             db.commit()
             return flask.redirect(flask.url_for('blog.index'))
