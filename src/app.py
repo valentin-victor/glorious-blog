@@ -17,6 +17,7 @@ app = flask.Flask(__name__)  # instantiate a minimal webserver
 
 app.config['DATABASE'] = app_dir / 'db.sqlite'  # path to the db file
 app.config['DEBUG'] = True
+app.config['SECRET_KEY'] = 'some_random_value'
 
 
 db.register_db_methods(app)  # register db management methods
