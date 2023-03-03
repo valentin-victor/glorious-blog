@@ -36,10 +36,11 @@ def register():
             error = 'Password is required.'
 
         if error is None:
+            hash = generate_password_hash(password)
             try:
                 db.execute(
                     f'INSERT INTO user (username, password) VALUES '
-                    f'("{username}", "{password}")'
+                    f'("{username}", "{hash}")'
                 )
                 db.commit()
             except db.IntegrityError:  # catch this specific exception
@@ -71,7 +72,7 @@ def login():
 
         if user is None:
             error = 'Incorrect username.'
-        elif user['password'] != password:
+        elif not check_password_hash(user['password'], password): # check if the unhashed password and password are equals
             error = 'Incorrect password.'
 
         if error is None:
