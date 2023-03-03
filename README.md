@@ -1,3 +1,8 @@
+# main branch for improving the security and functionality of the website
+
+
+---
+
 # My glorious blog
 
 One small project of a web blog.
