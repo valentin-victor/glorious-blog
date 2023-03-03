@@ -38,13 +38,13 @@ def register():
         if error is None:
             try:
                 db.execute(
-                    f'INSERT INTO user (username, password) VALUES '
-                    f'("{username}", "{password}")'
+                    'INSERT INTO user (username, password) VALUES (?, ?)',
+                    (username, password)
                 )
                 db.commit()
-            except db.IntegrityError:  # catch this specific exception
+            except db.IntegrityError: 
                 error = f'User {username} is already registered.'
-            else:  # if no exception happened
+            else:
                 return flask.redirect(flask.url_for('auth.login'))
 
         flask.flash(error, 'error')
@@ -66,7 +66,7 @@ def login():
         db = get_db()
         error = None
         user = db.execute(
-            f'SELECT * FROM user WHERE username = "{username}"'
+            'SELECT * FROM user WHERE username = ?', (username,)
         ).fetchone()
 
         if user is None:
@@ -75,10 +75,8 @@ def login():
             error = 'Incorrect password.'
 
         if error is None:
-            # generate redirect response, attach authentication cookie on it
-            # and return the response objectTypeError: Expected bytes
             response = flask.redirect(flask.url_for('index'))
-            response.set_cookie('user_id', str(user['id']))
+            response.set_cookie('user_id', str(user['id'], max_age=86400, expires=86400)) # age maximum, 1 jour. |-| "expires" est comme max age mais pour les navigateur sans la compatibilité de max_age
             return response
 
         flask.flash(error, 'error')
