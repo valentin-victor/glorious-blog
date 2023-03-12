@@ -39,8 +39,8 @@ def register():
             hash = generate_password_hash(password)
             try:
                 db.execute(
-                    f'INSERT INTO user (username, password) VALUES '
-                    f'("{username}", "{hash}")'
+                    f'INSERT INTO user (username, password) VALUES (?, ?)',
+                    (username, hash)
                 )
                 db.commit()
             except db.IntegrityError:  # catch this specific exception
