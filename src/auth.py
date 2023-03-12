@@ -7,6 +7,7 @@ import flask
 
 from db import get_db
 
+from werkzeug.security import generate_password_hash, check_password_hash
 
 bp = flask.Blueprint(  # declare new blueprint
     name='auth',
