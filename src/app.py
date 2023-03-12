@@ -10,10 +10,29 @@ import db
 import auth
 import blog
 
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 
 app_dir = pathlib.Path(__file__).resolve().parent
 
 app = flask.Flask(__name__)  # instantiate a minimal webserver
+
+limiter = Limiter(
+    get_remote_address,
+    app=app,
+    default_limits=["200 per day", "5 per hour"],
+    storage_uri="memory://",
+)
+
+@app.route('/register')
+@limiter.limit("5 per 1 hour") # limit of request
+def register():
+    return "5 per 1 hour"
+
+@app.route('/login')
+@limiter.limit("5 per 1 hour") # limit of request
+def login():
+    return "5 per 1 hour"
 
 app.config['DATABASE'] = app_dir / 'db.sqlite'  # path to the db file
 app.config['DEBUG'] = True
