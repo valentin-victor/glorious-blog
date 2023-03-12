@@ -22,7 +22,6 @@ def register():
     """Register view. Answer a GET request with the registration form.
     Insert new user in db when a POST request occurs and return user to login
     page if everything went right, otherwise to the register view.
-
     Returns (str): register view or redirect to login page
     """
     if flask.request.method == 'POST':
@@ -68,7 +67,7 @@ def login():
         db = get_db()
         error = None
         user = db.execute(
-            f'SELECT * FROM user WHERE username = "{username}"'
+            'SELECT * FROM user WHERE username = ?', (username,)
         ).fetchone()
 
         if user is None:
@@ -77,10 +76,8 @@ def login():
             error = 'Incorrect password.'
 
         if error is None:
-            # generate redirect response, attach authentication cookie on it
-            # and return the response objectTypeError: Expected bytes
             response = flask.redirect(flask.url_for('index'))
-            response.set_cookie('user_id', str(user['id']))
+            response.set_cookie('user_id', str(user['id'], max_age=86400, expires=86400)) # age maximum, 1 jour. |-| "expires" est comme max age mais pour les navigateur sans la compatibilité de max_age
             return response
 
         flask.flash(error, 'error')
